@@ -95,10 +95,10 @@ public class MyLinkedList {
         return size;
     }
 
-    public int get(int index){
+    public int get(int index) {
         ListNode current = head;
         int i = 0;
-        while(i != index ){
+        while (i != index) {
             current = current.next;
             i++;
         }
