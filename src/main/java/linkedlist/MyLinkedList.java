@@ -27,10 +27,10 @@ public class MyLinkedList {
                 current = current.next;
             }
             current.next = newNode;
+            size++;
         }
 
     }
-
 
     public boolean remove(int val) {
         if (head == null) {
@@ -51,7 +51,6 @@ public class MyLinkedList {
         return false;
     }
 
-
     public void print() {
         if (head == null) {
             System.out.println("List is empty");
@@ -65,7 +64,6 @@ public class MyLinkedList {
         }
 
     }
-
 
     public boolean contains(int val) {
         if (head == null) {
