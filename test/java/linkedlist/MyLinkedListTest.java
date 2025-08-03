@@ -11,6 +11,25 @@ public class MyLinkedListTest {
     class SizeTests {
 
         @Test
+        void sizeShouldDecreaseAfterRemovingMiddleElement() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.add(20);
+            list.add(30);
+            list.remove(20);
+            assertEquals(2, list.size());
+        }
+
+
+        @Test
+        void sizeShouldBeZeroAfterRemovingSingleElement() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.remove(10);
+            assertEquals(0, list.size());
+        }
+
+        @Test
         void sizeOfEmptyListShouldBeZero() {
             MyLinkedList list = new MyLinkedList();
             assertEquals(0, list.size());
@@ -68,8 +87,68 @@ public class MyLinkedListTest {
             assertEquals(2, list.size(), "Размер не должен измениться при попытке удалить несуществующий элемент");
         }
 
+        @Test
+        public void sizeAfterRemoveSingleElement() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(5);
+            assertEquals(1, list.size());
+            list.remove(5);
+            assertEquals(0, list.size());
+        }
+
+        @Test
+        public void sizeAfterRemoveNonExistentElement() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(5);
+            list.add(10);
+            assertEquals(2, list.size());
+            boolean removed = list.remove(20); // элемента 20 нет в списке
+            assertFalse(removed);
+            assertEquals(2, list.size());
+        }
+
+        @Test
+        public void sizeAfterRemoveFromEmptyList() {
+            MyLinkedList list = new MyLinkedList();
+            assertEquals(0, list.size());
+            boolean removed = list.remove(10);
+            assertFalse(removed);
+            assertEquals(0, list.size());
+        }
+
+        @Test
+        public void sizeAfterRemoveMultipleElements() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            assertEquals(3, list.size());
+            list.remove(2);
+            assertEquals(2, list.size());
+            list.remove(1);
+            assertEquals(1, list.size());
+            list.remove(3);
+            assertEquals(0, list.size());
+        }
+
+        @Test
+        public void sizeAfterRemoveDuplicates() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(5);
+            list.add(5);
+            list.add(5);
+            assertEquals(3, list.size());
+            list.remove(5);  // удалит первый встреченный 5
+            assertEquals(2, list.size());
+            list.remove(5);
+            assertEquals(1, list.size());
+            list.remove(5);
+            assertEquals(0, list.size());
+        }
+
 
     }
+
     @Nested
     class AddTest {
 
@@ -148,6 +227,119 @@ public class MyLinkedListTest {
             assertEquals(101, list.size());
             assertEquals(999, list.get(100));
         }
+    }
+
+    @Nested
+    class RemoveTest {
+
+        @Test
+        public void testListOrderAfterRemove() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            list.remove(2);
+            assertEquals(1, list.get(0));
+            assertEquals(3, list.get(1));
+        }
+
+
+        @Test
+        public void testRemoveAllDuplicatesManually() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(5);
+            list.add(5);
+            list.add(5);
+            assertTrue(list.remove(5));
+            assertTrue(list.remove(5));
+            assertTrue(list.remove(5));
+            assertEquals(0, list.size());
+        }
+
+
+        @Test
+        public void testRemoveMultipleSequentially() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            assertTrue(list.remove(1));
+            assertTrue(list.remove(2));
+            assertEquals(1, list.size());
+            assertEquals(3, list.get(0));
+        }
+
+
+        @Test
+        public void testRemoveExistingElement() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.add(20);
+            assertTrue(list.remove(10)); // Удаляем первый элемент
+            assertEquals(1, list.size());
+            assertEquals(20, list.get(0));
+        }
+
+        @Test
+        public void testRemoveNonExistingElement() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.add(20);
+            assertFalse(list.remove(30)); // Элемента 30 нет в списке
+            assertEquals(2, list.size());
+        }
+
+        @Test
+        public void testRemoveLastElement() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.add(20);
+            assertTrue(list.remove(20)); // Удаляем последний элемент
+            assertEquals(1, list.size());
+            assertEquals(10, list.get(0));
+        }
+
+        @Test
+        public void testRemoveFromEmptyList() {
+            MyLinkedList list = new MyLinkedList();
+            assertFalse(list.remove(10)); // Нельзя удалить из пустого списка
+            assertEquals(0, list.size());
+        }
+
+        @Test
+        public void testRemoveMultipleOccurrences() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.add(20);
+            list.add(10);
+            assertTrue(list.remove(10)); // Удаляется первый найденный элемент
+            assertEquals(2, list.size());
+            assertEquals(20, list.get(0));
+            assertEquals(10, list.get(1));
+        }
+
+        @Test
+        public void testSizeAfterRemove() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.add(20);
+            list.add(30);
+            assertEquals(3, list.size());
+            list.remove(20);
+            assertEquals(2, list.size()); // <-- если size не уменьшается, этот тест упадёт
+        }
+
+        @Test
+        public void testRemoveSingleRemainingElement() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(42);
+            assertTrue(list.remove(42));
+            assertEquals(0, list.size());
+            assertFalse(list.contains(42));
+        }
+
+
+
     }
 }
 

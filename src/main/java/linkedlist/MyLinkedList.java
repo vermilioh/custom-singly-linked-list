@@ -21,6 +21,7 @@ public class MyLinkedList {
         ListNode newNode = new ListNode(val);
         if (head == null) {
             head = newNode;
+            size++;
         } else {
             ListNode current = head;
             while (current.next != null) {
@@ -32,17 +33,20 @@ public class MyLinkedList {
 
     }
 
+
     public boolean remove(int val) {
         if (head == null) {
             return false;
         } else if (head.value == val) {
             head = head.next;
+            size--;
             return true;
         } else {
             ListNode current = head;
             while (current.next != null) {
                 if (current.next.value == val) {
                     current.next = current.next.next;
+                    size--;
                     return true;
                 }
                 current = current.next;
@@ -51,19 +55,19 @@ public class MyLinkedList {
         return false;
     }
 
-    public void print() {
-        if (head == null) {
-            System.out.println("List is empty");
-        } else {
-            ListNode current = head;
-            while (current != null) {
-                System.out.print(current.value + " ");
-                current = current.next;
-            }
-
-        }
-
-    }
+//    public void print() {
+//        if (head == null) {
+//            System.out.println("List is empty");
+//        } else {
+//            ListNode current = head;
+//            while (current != null) {
+//                System.out.print(current.value + " ");
+//                current = current.next;
+//            }
+//
+//        }
+//
+//    }
 
     public boolean contains(int val) {
         if (head == null) {
@@ -82,16 +86,10 @@ public class MyLinkedList {
 
     public void clear() {
         head = null;
+        size = 0;
     }
 
     public int size() {
-        int size = 0;
-        ListNode current = head;
-
-        while (current != null) {
-            size += 1;
-            current = current.next;
-        }
         return size;
     }
 
