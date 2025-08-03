@@ -339,8 +339,83 @@ public class MyLinkedListTest {
         }
 
 
-
     }
+
+    @Nested
+    class ContainsTest {
+        @Test
+        public void testContainsAfterRemovingAll() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.remove(10);
+            assertFalse(list.contains(10));
+        }
+
+        @Test
+        public void testContainsAfterClearSimulation() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.add(20);
+            list.remove(10);
+            list.remove(20);
+            assertFalse(list.contains(10));
+            assertFalse(list.contains(20));
+        }
+
+        @Test
+        public void testContainsNegativeNumbers() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(-1);
+            list.add(-100);
+            assertTrue(list.contains(-1));
+            assertTrue(list.contains(-100));
+            assertFalse(list.contains(-999));
+        }
+
+        @Test
+        public void testContainsExistingElement() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.add(20);
+            assertTrue(list.contains(10));
+            assertTrue(list.contains(20));
+        }
+
+        @Test
+        public void testContainsNonExistingElement() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.add(20);
+            assertFalse(list.contains(30));
+        }
+
+        @Test
+        public void testContainsInEmptyList() {
+            MyLinkedList list = new MyLinkedList();
+            assertFalse(list.contains(10));
+        }
+
+        @Test
+        public void testContainsAfterRemove() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.add(20);
+            list.remove(10);
+            assertFalse(list.contains(10));
+            assertTrue(list.contains(20));
+        }
+
+        @Test
+        public void testContainsWithDuplicates() {
+            MyLinkedList list = new MyLinkedList();
+            list.add(10);
+            list.add(20);
+            list.add(10);
+            assertTrue(list.contains(10));
+            assertTrue(list.contains(20));
+        }
+    }
+
 }
 
 
