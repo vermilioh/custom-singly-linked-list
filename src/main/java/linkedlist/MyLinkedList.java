@@ -94,6 +94,9 @@ public class MyLinkedList {
     }
 
     public int get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
         ListNode current = head;
         int i = 0;
         while (i != index) {
