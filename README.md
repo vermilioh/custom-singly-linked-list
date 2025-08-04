@@ -1,7 +1,5 @@
-
-
 <details open>
-<summary>🇷🇺 Описание на русском</summary>
+<summary> Описание на русском (English below)</summary>
 
 # Односвязный список на Java
 
@@ -55,7 +53,7 @@ src/
 
 
 <details>
-<summary>🇬🇧 English Description</summary>
+<summary> English Description</summary>
 
 # Singly Linked List in Java
 
