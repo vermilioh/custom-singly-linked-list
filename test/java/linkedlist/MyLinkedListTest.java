@@ -444,6 +444,7 @@ public class MyLinkedListTest {
             assertThrows(IndexOutOfBoundsException.class, () -> list.get(-1));
         }
 
+
         @Test
         public void testGetIndexEqualToSize_throwsException() {
             MyLinkedList list = new MyLinkedList();
